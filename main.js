@@ -39,7 +39,7 @@ function handleNumberClick(){
         }
     }
         else{
-        doMath();
+        conditionalChecks();
             }
 }
 
@@ -82,9 +82,8 @@ function handleClearClick(){
 }
 
 
-function doMath() {
+function conditionalChecks() {
     var operators = '+-/x';
-    var solution = '';
     if (userInput.length === 0 || $('#displayBar').text() === 'Ready' ){
         $('#displayBar').text('Ready');
         return
@@ -94,7 +93,7 @@ function doMath() {
         $('#displayBar').text($('#displayBar').text().substring(0, $('#displayBar').text().length - 1) + '0' + $(this).text());
     }
     if (operationRepeat === true){
-        repeatingOperation(solution);
+        repeatingOperation();
         return
     } else {
         repeatMath = [];
@@ -105,35 +104,23 @@ function doMath() {
     }
     if (operators.indexOf(userInput[userInput.length-1]) !== -1){
         operationRollover = userInput.pop();
-        rolloverOperation(solution);
+        rolloverOperation();
         return
-    }while (userInput.length) {
-        if (isNaN(userInput[0]) === false) {
-            solution = solution + userInput[0];
-            userInput.shift();
-        } else {
-            if (userInput[0] === 'x') {
-                userInput[0] = '*';
-            }
-            solution = solution + userInput[0];
-            userInput.shift();
-        }
     }
-    solution = eval(solution);
-    if (solution === Infinity || isNaN(solution)){
-        userInput[0] = '';
-        $('#displayBar').text('Error');
-    } else {
-        userInput[0] = ''+solution;
-        $('#displayBar').text(solution);
+    if (userInput[0] === '-'){
+        userInput[0] = userInput[0] + userInput[1];
+        userInput.splice(1,1);
     }
-    operationRepeat = true;
+
+    doMath();
 }
 
 
 function decimalCheck(){
     var operators = '+-/x';
+    //if start of array index
     if (userInput[userInput.length-1] === undefined){
+        //if array length is 0
         if (userInput[userInput.length-1] === userInput[-1]){
             userInput[0]=('.');
             $('#displayBar').text($('#displayBar').text()+'.');
@@ -142,11 +129,13 @@ function decimalCheck(){
             $('#displayBar').text($('#displayBar').text()+'.');
         }
     }
+    //if operator is not most recent input
     if (operators.indexOf(userInput[userInput.length-1]) !== -1){
         userInput.push('.');
         $('#displayBar').text($('#displayBar').text()+'.');
         return;
     } else {
+        //if decimal is not in last array index
         if (userInput[userInput.length-1].indexOf('.') === -1){
             userInput[userInput.length-1]+=('.');
             $('#displayBar').text($('#displayBar').text()+'.');
@@ -155,7 +144,10 @@ function decimalCheck(){
 }
 
 
-function repeatingOperation(solution){
+function repeatingOperation(){
+    if (repeatMath[0] === undefined){
+        return
+    }
     if (isNaN(repeatMath[1]) === true){
         var rM0 = repeatMath[1];
         var rM1 = repeatMath[0];
@@ -163,47 +155,76 @@ function repeatingOperation(solution){
         repeatMath[1] = rM1;
     }
     userInput.push(repeatMath[0], repeatMath[1]);
-    while (userInput.length) {
-        if (isNaN(userInput[0]) === false) {
-            solution = solution + userInput[0];
-            userInput.shift();
-        } else {
-            if (userInput[0] === 'x') {
-                userInput[0] = '*';
-            }
-            solution = solution + userInput[0];
-            userInput.shift();
-        }
-    }
-    solution = eval(solution);
-    if (solution === Infinity){
-        userInput[0] = '';
-        $('#displayBar').text('Error');
-    } else {
-        userInput[0] = ''+solution;
-        $('#displayBar').text(solution);
-    }
+    doMath();
 }
 
-function rolloverOperation(solution){
-    while (userInput.length) {
-        if (isNaN(userInput[0]) === false) {
-            solution = solution + userInput[0];
-            userInput.shift();
-        } else {
-            if (userInput[0] === 'x') {
-                userInput[0] = '*';
+
+function rolloverOperation(){
+    mathMultDiv();
+    mathAddSub();
+    userInput.push(operationRollover);
+    userInput.push(userInput[0]);
+    doMath();
+}
+
+
+function doMath(){
+    mathMultDiv();
+    mathAddSub();
+    returnSolution();
+}
+
+
+function mathMultDiv(){
+    var changesMade = true;
+    do {
+        changesMade = false;
+        for (var i=0; i<userInput.length; i++){
+            if (('x').indexOf(userInput[i]) !== -1){
+                userInput[i] = userInput[i-1] * userInput[i + 1];
+                userInput.splice(i+1,1);
+                userInput.splice(i-1,1);
+                changesMade = true;
+            } else if (('/').indexOf(userInput[i]) !== -1){
+                userInput[i] = userInput[i-1] / userInput[i + 1];
+                userInput.splice(i+1,1);
+                userInput.splice(i-1,1);
+                changesMade = true;
+            } else {
+
             }
-            solution = solution + userInput[0];
-            userInput.shift();
         }
     }
-    solution = eval(solution);
-    if (operationRollover === 'x'){
-        operationRollover = '*';
+    while (changesMade);
+}
+
+
+function mathAddSub(){
+    var changesMade = true;
+    do {
+        changesMade = false;
+        for (var k = 0; k < userInput.length; k++) {
+            if (('+').indexOf(userInput[k]) !== -1) {
+                userInput[k] = parseFloat(userInput[k - 1]) + parseFloat(userInput[k + 1]);
+                userInput.splice(k + 1, 1);
+                userInput.splice(k - 1, 1);
+                changesMade = true;
+            } else if (('-').indexOf(userInput[k]) !== -1) {
+                userInput[k] = userInput[k - 1] - userInput[k + 1];
+                userInput.splice(k + 1, 1);
+                userInput.splice(k - 1, 1);
+                changesMade = true;
+            }
+        }
     }
-    solution = eval(solution + operationRollover + solution);
-    if (solution === Infinity){
+    while (changesMade);
+}
+
+
+function returnSolution(){
+    var solution;
+    solution = userInput[0];
+    if (solution === Infinity || isNaN(solution)){
         userInput[0] = '';
         $('#displayBar').text('Error');
     } else {

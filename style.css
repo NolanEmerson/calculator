@@ -10,75 +10,28 @@ body{
 }
 
 
-#headArea{
+#headArea {
     height: 15%;
     text-align: center;
     line-height: 15vh;
-    background: linear-gradient(0deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1000% 1000%;
-    -webkit-animation: rainbowHead 5s ease infinite;
-    -z-animation: rainbowHead 5s ease infinite;
-    -o-animation: rainbowHead 5s ease infinite;
-    animation: rainbowHead 5s ease infinite;
-}
-@-webkit-keyframes rainbowHead {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-moz-keyframes rainbowHead {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-o-keyframes rainbowHead {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbowHead {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    background-color: darkslategray;
 }
 #headText{
     margin: 0;
     font-family: Calibri;
     font-size: 10vmin;
+    color: aliceblue;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
 }
 
 
 #mainArea{
     height: 85%;
-    background: linear-gradient(120deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1000% 1000%;
-    -webkit-animation: rainbowMain 4s ease infinite;
-    -z-animation: rainbowMain 4s ease infinite;
-    -o-animation: rainbowMain 4s ease infinite;
-    animation: rainbowMain 4s ease infinite;}
-
-@-webkit-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    background-color: lightgrey;
 }
-@-moz-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-o-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-#calculatorBase{
-    border: 2px solid deeppink;
+#calculatorBase {
+    border: 2px solid black;
     height: 85%;
     width: 25%;
     position: relative;
@@ -86,32 +39,8 @@ body{
     left: 50%;
     border-radius: 5%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(240deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1000% 1000%;
-    -webkit-animation: rainbowMain 2s ease infinite;
-    -z-animation: rainbowMain 2s ease infinite;
-    -o-animation: rainbowMain 2s ease infinite;
-    animation: rainbowMain 2s ease infinite;}
-
-@-webkit-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-moz-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-o-keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbowMain {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    background-color: lightslategrey;
+    box-shadow: 2px 2px 10px;
 }
 #displayHead{
     position: relative;
@@ -124,13 +53,14 @@ body{
     position: relative;
     height: 75%;
     width: 90%;
-    background-color: rebeccapurple;
+    background-color: lightsteelblue;
     text-justify: auto;
     text-align: right;
     font-size: 10vmin;
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
+    border: 1px solid black;
 }
 #leftSide{
     height: 75%;
@@ -146,7 +76,7 @@ body{
 .clear{
     height: 80%;
     width: 45%;
-    background-color: aqua;
+    background-color: #e3e3e3;
 }
 #numberArea{
     height: 80%;
@@ -159,7 +89,7 @@ body{
 .numbers button{
     width: 30%;
     height: 20%;
-    background-color: lime;
+    background-color: aliceblue;
 }
 #rightSide{
     display: inline-flex;
@@ -173,7 +103,7 @@ body{
 .operators button{
     width: 80%;
     height: 15%;
-    background-color: orangered;
+    background-color: palevioletred;
 }
 #addition{
     height: 35%;
