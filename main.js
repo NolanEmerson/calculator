@@ -169,7 +169,6 @@ function handleClearClick(event){
 
 
 function conditionalChecks(textInput) {
-    lastEquation = $('#displayBar').text();
     var operators = '+-/*';
     if (userInput.length === 0 || $('#displayBar').text() === 'Ready' ){
         $('#displayBar').text('Ready');
@@ -199,7 +198,7 @@ function conditionalChecks(textInput) {
         userInput[0] = userInput[0] + userInput[1];
         userInput.splice(1,1);
     }
-
+    lastEquation = $('#displayBar').text();
     doMath();
 }
 
@@ -319,6 +318,7 @@ function returnSolution(){
     if (solution === Infinity || isNaN(solution)){
         userInput[0] = '';
         $('#displayBar').text('Error');
+        solution = 'Error';
     } else {
         userInput[0] = ''+solution;
         $('#displayBar').text(solution);
