@@ -41,6 +41,8 @@ body{
     transform: translate(-50%, -50%);
     background-color: lightslategrey;
     box-shadow: 2px 2px 10px;
+    display: inline-block;
+    vertical-align: top;
 }
 #displayHead{
     position: relative;
@@ -107,4 +109,103 @@ body{
 }
 #addition{
     height: 35%;
+}
+button{
+    font-size: 5vmin;
+    cursor: pointer;
+}
+.historyToggle{
+    position: absolute;
+    height: 5%;
+    width: 5%;
+    border: 1px solid black;
+    display: inline-block;
+    left: 73%;
+    top: 25%;
+    box-sizing: border-box;
+    border-radius: 25%;
+    line-height: 3.2vh;
+    text-align: center;
+    font-size: 3vmin;
+    background-color: bisque;
+    cursor: pointer;
+}
+.historyArea{
+    position: relative;
+    height: 65%;
+    width: 20%;
+    border: 1px solid black;
+    display: inline-flex;
+    left: 40%;
+    top: 20%;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.questionHistory{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.questionHistoryHead, .questionHistory1, .questionHistory2, .questionHistory3, .questionHistory4, .questionHistory5{
+    height: 16.66%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    text-align: center;
+    line-height: 8vh;
+    overflow: hidden;
+}
+.questionHistoryHead{
+    border: none;
+    background-color: seashell;
+}
+.questionHistory1, .questionHistory3, .questionHistory5{
+    background-color: lavender;
+}
+.questionHistory2, .questionHistory4{
+    background-color: lavenderblush;
+}
+.answerHistory{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.answerHistoryHead, .answerHistory1, .answerHistory2, .answerHistory3, .answerHistory4, .answerHistory5{
+    height: 16.66%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    text-align: center;
+    line-height: 8vh;
+    overflow: hidden;
+}
+.answerHistoryHead{
+    border: none;
+    background-color: seashell;
+}
+.answerHistory1, .answerHistory3, .answerHistory5{
+    background-color: lavender;
+}
+.answerHistory2, .answerHistory4{
+    background-color: lavenderblush;
+}
+.hide{
+    display: none;
 }

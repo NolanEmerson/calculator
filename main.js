@@ -5,11 +5,13 @@ const userInput = [];
 var operationRepeat = false;
 var repeatMath = [];
 var operationRollover = '';
+var lastEquation = null;
 
 
 function initializeApp(){
     attachClickHandlers();
     attachKeypressHandlers();
+    $('.questionHistory').addClass('hide');
 }
 
 
@@ -17,6 +19,7 @@ function attachClickHandlers(){
     $('.numbers > button').on('click',handleNumberClick);
     $('.operators > button').on('click',handleOperatorClick);
     $('.clear').on('click',handleClearClick);
+    $('.historyToggle').on('click',toggleHistoryDisplay);
 }
 
 
@@ -166,6 +169,7 @@ function handleClearClick(event){
 
 
 function conditionalChecks(textInput) {
+    lastEquation = $('#displayBar').text();
     var operators = '+-/*';
     if (userInput.length === 0 || $('#displayBar').text() === 'Ready' ){
         $('#displayBar').text('Ready');
@@ -183,6 +187,7 @@ function conditionalChecks(textInput) {
     }
     repeatMath.push(userInput[userInput.length-2], userInput[userInput.length-1]);
     if (userInput[0] === '/' || userInput[0] === '*'){
+        $('#displayBar').text($('#displayBar').text().substring(1, $('#displayBar').text().length+3));
         userInput.shift();
     }
     if (operators.indexOf(userInput[userInput.length-1]) !== -1){
@@ -319,4 +324,31 @@ function returnSolution(){
         $('#displayBar').text(solution);
     }
     operationRepeat = true;
+    updateHistory(solution);
+}
+
+
+function updateHistory(solution){
+    $('.questionHistory5').text($('.questionHistory4').text());
+    $('.questionHistory4').text($('.questionHistory3').text());
+    $('.questionHistory3').text($('.questionHistory2').text());
+    $('.questionHistory2').text($('.questionHistory1').text());
+    $('.questionHistory1').text(lastEquation);
+
+    $('.answerHistory5').text($('.answerHistory4').text());
+    $('.answerHistory4').text($('.answerHistory3').text());
+    $('.answerHistory3').text($('.answerHistory2').text());
+    $('.answerHistory2').text($('.answerHistory1').text());
+    $('.answerHistory1').text(solution);
+}
+
+
+function toggleHistoryDisplay(){
+    if ($('.questionHistory').hasClass('hide') === true){
+        $('.answerHistory').addClass('hide');
+        $('.questionHistory').removeClass('hide');
+    } else {
+        $('.questionHistory').addClass('hide');
+        $('.answerHistory').removeClass('hide');
+    }
 }
