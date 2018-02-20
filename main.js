@@ -9,6 +9,7 @@ var operationRollover = '';
 
 function initializeApp(){
     attachClickHandlers();
+    attachKeypressHandlers();
 }
 
 
@@ -19,58 +20,140 @@ function attachClickHandlers(){
 }
 
 
-function handleNumberClick(){
+function attachKeypressHandlers(){
+   $(document).keyup(function(e){
+       switch(e.which){
+           case 48:
+           case 49:
+           case 50:
+           case 51:
+           case 52:
+           case 53:
+           case 54:
+           case 55:
+           case 57:
+           case 190:
+           case 96:
+           case 97:
+           case 98:
+           case 99:
+           case 100:
+           case 101:
+           case 102:
+           case 103:
+           case 104:
+           case 105:
+           case 110:
+           case 13:
+               if (e.shiftKey === true){
+                   break;
+               }
+               handleNumberClick(e.key);
+               break;
+           case 56:
+               if (e.shiftKey === true){
+                   handleOperatorClick('*');
+               } else {
+                   handleNumberClick(e.key);
+               }
+               break;
+           case 187:
+               if (e.shiftKey === true){
+                   handleOperatorClick('+');
+               } else {
+                   handleNumberClick(e.key);
+               }
+               break;
+           case 8:
+           case 46:
+               handleClearClick(e.key);
+               break;
+           case 111:
+           case 106:
+           case 109:
+           case 107:
+           case 189:
+           case 191:
+               handleOperatorClick(e.key);
+               break;
+       }
+   });
+}
+
+
+function handleNumberClick(event){
+    if (event !== undefined && this.length === 0){
+        var textInput = event;
+        $('event').blur();
+    } else {
+        textInput = $(this).text();
+        $(this).blur();
+    }
     if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
         $('#displayBar').text('');
         operationRepeat = false;
     }
-    if ($(this).text() === '.'){
+    if (textInput === '.'){
         decimalCheck();
         operationRepeat = false;
-    } else if($(this).text()!== '=') {
+    } else if(textInput !== '=' && textInput !== 'Enter') {
         if (isNaN(userInput[userInput.length-1]) === false || userInput[userInput.length-1] === '.') {
-            userInput[userInput.length - 1] = userInput[userInput.length - 1].concat($(this).text());
-            $('#displayBar').text($('#displayBar').text() + $(this).text());
+            userInput[userInput.length - 1] = userInput[userInput.length - 1].concat(textInput);
+            $('#displayBar').text($('#displayBar').text() + textInput);
             operationRepeat = false;
         } else {
-            userInput.push($(this).text());
-            $('#displayBar').text($('#displayBar').text() + $(this).text());
+            userInput.push(textInput);
+            $('#displayBar').text($('#displayBar').text() + textInput);
             operationRepeat = false;
         }
     }
         else{
-        conditionalChecks();
+        conditionalChecks(textInput);
             }
 }
 
 
-function handleOperatorClick(){
-    var operators = 'x+-/';
+function handleOperatorClick(event){
+    if (event !== undefined && this.length === 0){
+        var textInput = event;
+        $('event').blur();
+    } else {
+        textInput = $(this).text();
+        $(this).blur();
+    }
+    var operators = '+*-/';
     if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
         $('#displayBar').text('');
         operationRepeat = false;
     }
     if (operators.indexOf(userInput[userInput.length-1]) !== -1) {
         userInput.pop();
-        userInput.push($(this).text());
+        userInput.push(textInput);
         $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1));
-        $('#displayBar').text($('#displayBar').text() + $(this).text());
+        $('#displayBar').text($('#displayBar').text() + textInput);
         operationRepeat = false;
     } else if (userInput[userInput.length-1] === '.'){
         userInput[userInput.length-1]='0';
-        userInput.push($(this).text());
-        $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1) + '0' + $(this).text());
+        userInput.push(textInput);
+        $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1) + '0' + textInput);
         operationRepeat = false;
     } else {
-        userInput.push($(this).text());
-        $('#displayBar').text($('#displayBar').text() + $(this).text());
+        userInput.push(textInput);
+        $('#displayBar').text($('#displayBar').text() + textInput);
         operationRepeat = false;
     }
 }
 
 
-function handleClearClick(){
-    if ($(this).text() === 'C'){
+function handleClearClick(event){
+    if (event !== undefined && this.length === 0){
+        var textInput = event;
+        $('event').blur();
+    } else {
+        textInput = $(this).text();
+        $(this).blur();
+    }
+    if (textInput === 'C' || textInput === 'Delete'){
         userInput.length = 0;
         $('#displayBar').text('');
         operationRepeat = false;
@@ -82,15 +165,15 @@ function handleClearClick(){
 }
 
 
-function conditionalChecks() {
-    var operators = '+-/x';
+function conditionalChecks(textInput) {
+    var operators = '+-/*';
     if (userInput.length === 0 || $('#displayBar').text() === 'Ready' ){
         $('#displayBar').text('Ready');
         return
     }
     if (userInput[userInput.length-1] === '.') {
         userInput[userInput.length - 1] = '0';
-        $('#displayBar').text($('#displayBar').text().substring(0, $('#displayBar').text().length - 1) + '0' + $(this).text());
+        $('#displayBar').text($('#displayBar').text().substring(0, $('#displayBar').text().length - 1) + '0' + textInput);
     }
     if (operationRepeat === true){
         repeatingOperation();
@@ -99,7 +182,7 @@ function conditionalChecks() {
         repeatMath = [];
     }
     repeatMath.push(userInput[userInput.length-2], userInput[userInput.length-1]);
-    if (userInput[0] === '/' || userInput[0] === 'x'){
+    if (userInput[0] === '/' || userInput[0] === '*'){
         userInput.shift();
     }
     if (operators.indexOf(userInput[userInput.length-1]) !== -1){
@@ -117,7 +200,7 @@ function conditionalChecks() {
 
 
 function decimalCheck(){
-    var operators = '+-/x';
+    var operators = '+-/*';
     //if start of array index
     if (userInput[userInput.length-1] === undefined){
         //if array length is 0
@@ -180,16 +263,18 @@ function mathMultDiv(){
     do {
         changesMade = false;
         for (var i=0; i<userInput.length; i++){
-            if (('x').indexOf(userInput[i]) !== -1){
+            if (('*').indexOf(userInput[i]) !== -1){
                 userInput[i] = userInput[i-1] * userInput[i + 1];
                 userInput.splice(i+1,1);
                 userInput.splice(i-1,1);
                 changesMade = true;
+                break;
             } else if (('/').indexOf(userInput[i]) !== -1){
                 userInput[i] = userInput[i-1] / userInput[i + 1];
                 userInput.splice(i+1,1);
                 userInput.splice(i-1,1);
                 changesMade = true;
+                break;
             } else {
 
             }
@@ -209,11 +294,13 @@ function mathAddSub(){
                 userInput.splice(k + 1, 1);
                 userInput.splice(k - 1, 1);
                 changesMade = true;
+                break;
             } else if (('-').indexOf(userInput[k]) !== -1) {
                 userInput[k] = userInput[k - 1] - userInput[k + 1];
                 userInput.splice(k + 1, 1);
                 userInput.splice(k - 1, 1);
                 changesMade = true;
+                break;
             }
         }
     }
