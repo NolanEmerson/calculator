@@ -117,11 +117,27 @@ function handleNumberClick(event){
 
 
 function handleOperatorClick(event){
+    let displayText;
     if (event !== undefined && this.length === 0){
         var textInput = event;
+        displayText = event;
         $('event').blur();
     } else {
-        textInput = $(this).text();
+        displayText = $(this).text();
+        switch ($(this).text().charCodeAt(0)){
+            case 247:
+                textInput = '/';
+                break;
+            case 215:
+                textInput = '*';
+                break;
+            case 8722:
+                textInput = '-';
+                break;
+            case 43:
+                textInput = '+';
+                break;
+        }
         $(this).blur();
     }
     var operators = '+*-/';
@@ -133,16 +149,16 @@ function handleOperatorClick(event){
         userInput.pop();
         userInput.push(textInput);
         $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1));
-        $('#displayBar').text($('#displayBar').text() + textInput);
+        $('#displayBar').text($('#displayBar').text() + displayText);
         operationRepeat = false;
     } else if (userInput[userInput.length-1] === '.'){
         userInput[userInput.length-1]='0';
         userInput.push(textInput);
-        $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1) + '0' + textInput);
+        $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1) + '0' + displayText);
         operationRepeat = false;
     } else {
         userInput.push(textInput);
-        $('#displayBar').text($('#displayBar').text() + textInput);
+        $('#displayBar').text($('#displayBar').text() + displayText);
         operationRepeat = false;
     }
 }
