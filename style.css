@@ -9,23 +9,6 @@ body{
     font-family: Calibri;
 }
 
-
-#headArea {
-    height: 15%;
-    text-align: center;
-    line-height: 15vh;
-    background-color: darkslategray;
-}
-#headText{
-    margin: 0;
-    font-family: Calibri;
-    font-size: 10vmin;
-    color: aliceblue;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-}
-
-
 #mainArea{
     height: 100%;
     background-color: lightgrey;
