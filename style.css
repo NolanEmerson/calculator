@@ -1,0 +1,235 @@
+body{
+    margin: 0;
+    font-size: 0;
+}
+#container{
+    height: 100vh;
+    width: 100vw;
+    font-size: 4vmin;
+    font-family: Calibri;
+}
+
+
+#headArea {
+    height: 15%;
+    text-align: center;
+    line-height: 15vh;
+    background-color: darkslategray;
+}
+#headText{
+    margin: 0;
+    font-family: Calibri;
+    font-size: 10vmin;
+    color: aliceblue;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+
+#mainArea{
+    height: 100%;
+    background-color: lightgrey;
+}
+#calculatorBase {
+    border: 2px solid black;
+    height: 85%;
+    width: 25%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    border-radius: 5%;
+    transform: translate(-50%, -50%);
+    background-color: lightslategrey;
+    box-shadow: 2px 2px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+#displayHead{
+    position: relative;
+    height: 25%;
+    width: 100%;
+}
+#displayBar{
+    margin: 0 5%;
+    top: 15%;
+    position: relative;
+    height: 75%;
+    width: 90%;
+    background-color: lightsteelblue;
+    text-justify: auto;
+    text-align: right;
+    font-size: 10vmin;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.buttonSection {
+    height: 75%;
+    font-size: 0;
+    margin: 0;
+}
+
+#leftSide{
+    height: 100%;
+    width: 70%;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+#clearArea{
+    width: 100%;
+    height: 18%;
+    display: flex;
+    justify-content: space-between;
+}
+.clear{
+    height: 90%;
+    width: 45%;
+    background-color: #e3e3e3;
+}
+#numberArea{
+    height: 82%;
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 0 10px 0;
+    box-sizing: border-box;
+}
+.numbers button{
+    width: 31%;
+    height: 22%;
+    background-color: aliceblue;
+}
+#rightSide{
+    display: inline-flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+    vertical-align: top;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 10px 10px 0;
+    box-sizing: border-box;
+}
+.operators button{
+    width: 80%;
+    height: 17%;
+    background-color: palevioletred;
+}
+#addition{
+    height: 35%;
+}
+button{
+    font-size: 5vmin;
+    cursor: pointer;
+}
+
+.historyHolder {
+    position: absolute;
+    display: inline-block;
+    top: 10%;
+    right: 10%;
+}
+
+.historyToggle{
+    position: relative;
+    height: 5vh;
+    width: 5vw;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 3vmin;
+    background-color: bisque;
+    cursor: pointer;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.historyArea{
+    position: relative;
+    height: 65vh;
+    width: 20vw;
+    border: 1px solid black;
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.questionHistory{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.questionHistoryHead, .questionHistory1, .questionHistory2, .questionHistory3, .questionHistory4, .questionHistory5{
+    height: 16.66%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.questionHistoryHead{
+    border: none;
+    background-color: seashell;
+}
+.questionHistory1, .questionHistory3, .questionHistory5{
+    background-color: lavender;
+}
+.questionHistory2, .questionHistory4{
+    background-color: lavenderblush;
+}
+.answerHistory{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-flow: column wrap;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px;
+}
+.answerHistoryHead, .answerHistory1, .answerHistory2, .answerHistory3, .answerHistory4, .answerHistory5{
+    height: 16.66%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.answerHistoryHead{
+    border: none;
+    background-color: seashell;
+}
+.answerHistory1, .answerHistory3, .answerHistory5{
+    background-color: lavender;
+}
+.answerHistory2, .answerHistory4{
+    background-color: lavenderblush;
+}
+.hide{
+    display: none;
+}
