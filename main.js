@@ -24,63 +24,63 @@ function attachClickHandlers(){
 
 
 function attachKeypressHandlers(){
-   $(document).keyup(function(e){
-       switch(e.which){
-           case 48:
-           case 49:
-           case 50:
-           case 51:
-           case 52:
-           case 53:
-           case 54:
-           case 55:
-           case 57:
-           case 190:
-           case 96:
-           case 97:
-           case 98:
-           case 99:
-           case 100:
-           case 101:
-           case 102:
-           case 103:
-           case 104:
-           case 105:
-           case 110:
-           case 13:
-               if (e.shiftKey === true){
-                   break;
-               }
-               handleNumberClick(e.key);
-               break;
-           case 56:
-               if (e.shiftKey === true){
+    $(document).keyup(function(e){
+        switch(e.which){
+            case 48:
+            case 49:
+            case 50:
+            case 51:
+            case 52:
+            case 53:
+            case 54:
+            case 55:
+            case 57:
+            case 190:
+            case 96:
+            case 97:
+            case 98:
+            case 99:
+            case 100:
+            case 101:
+            case 102:
+            case 103:
+            case 104:
+            case 105:
+            case 110:
+            case 13:
+                if (e.shiftKey === true){
+                    break;
+                }
+                handleNumberClick(e.key);
+                break;
+            case 56:
+                if (e.shiftKey === true){
                    handleOperatorClick('*');
-               } else {
-                   handleNumberClick(e.key);
-               }
-               break;
-           case 187:
-               if (e.shiftKey === true){
-                   handleOperatorClick('+');
-               } else {
-                   handleNumberClick(e.key);
-               }
-               break;
-           case 8:
-           case 46:
-               handleClearClick(e.key);
-               break;
-           case 111:
-           case 106:
-           case 109:
-           case 107:
-           case 189:
-           case 191:
-               handleOperatorClick(e.key);
-               break;
-       }
-   });
+                } else {
+                    handleNumberClick(e.key);
+                }
+                break;
+            case 187:
+                if (e.shiftKey === true){
+                    handleOperatorClick('+');
+                } else {
+                    handleNumberClick(e.key);
+                }
+                break;
+            case 8:
+            case 46:
+                handleClearClick(e.key);
+                break;
+            case 111:
+            case 106:
+            case 109:
+            case 107:
+            case 189:
+            case 191:
+                handleOperatorClick(e.key);
+                break;
+        }
+    });
 }
 
 
@@ -201,7 +201,7 @@ function conditionalChecks(textInput) {
         repeatMath = [];
     }
     repeatMath.push(userInput[userInput.length-2], userInput[userInput.length-1]);
-    if (userInput[0] === '/' || userInput[0] === '*'){
+    if (userInput[0] === '/' || userInput[0] === '*' || userInput[0] === '+'){
         $('#displayBar').text($('#displayBar').text().substring(1, $('#displayBar').text().length+3));
         userInput.shift();
     }
