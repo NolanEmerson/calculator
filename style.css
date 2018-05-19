@@ -266,6 +266,14 @@ button:focus {
     }
 
     .historyArea {
-        width: 25vw;
+        width: 20vw;
+    }
+
+    .historyHolder {
+        right: 15%;
+    }
+
+    #calculatorBase {
+        left: 35%;
     }
 }
