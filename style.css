@@ -16,10 +16,10 @@ body{
 #calculatorBase {
     border: 2px solid black;
     height: 85%;
-    width: 25%;
+    width: 35%;
     position: relative;
     top: 50%;
-    left: 50%;
+    left: 30%;
     border-radius: 5%;
     transform: translate(-50%, -50%);
     background-color: lightslategrey;
@@ -128,14 +128,15 @@ button:focus {
 .historyHolder {
     position: absolute;
     display: inline-block;
-    top: 10%;
+    top: 25%;
     right: 10%;
+    
 }
 
 .historyToggle{
     position: relative;
     height: 5vh;
-    width: 5vw;
+    width: 15vw;
     border: 1px solid black;
     box-sizing: border-box;
     border-radius: 5px;
@@ -150,8 +151,8 @@ button:focus {
 }
 .historyArea{
     position: relative;
-    height: 65vh;
-    width: 20vw;
+    height: 40vh;
+    width: 30vw;
     border: 1px solid black;
     display: flex;
     box-sizing: border-box;
@@ -231,27 +232,20 @@ button:focus {
     display: none;
 }
 
-@media only screen and (orientation: portrait) {
-
+@media screen and (max-width: 1000px) {
+    
     #calculatorBase {
-        left: 30%;
-        min-height: 400px;
-        max-height: 800px;
-        min-width: 400px;
-        max-width: 800px;
+        width: 50%;
     }
+}
 
-    .historyHolder {
-        top: 25%;
-    }
+@media screen and (min-width: 1000px) {
 
     .historyToggle {
-        width: 15vw;
+        width: 10vw;
     }
 
     .historyArea {
-        height: 40vh;
-        width: 30vw;
+        width: 25vw;
     }
-
 }
