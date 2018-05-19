@@ -39,14 +39,16 @@ body{
     height: 75%;
     width: 90%;
     background-color: lightsteelblue;
-    text-justify: auto;
-    text-align: right;
     font-size: 10vmin;
-    padding: 10px;
+    border: 10px solid rgba(0, 0, 0, 0);
     box-sizing: border-box;
     overflow: hidden;
     border: 1px solid black;
     border-radius: 5px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .buttonSection {
@@ -232,14 +234,29 @@ button:focus {
     display: none;
 }
 
-@media screen and (max-width: 1000px) {
-    
+@media all and (orientation: portrait) and (max-width: 450px)  {
+
     #calculatorBase {
+        top: 2%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 50%;
         width: 50%;
+    }
+
+    .historyHolder {
+        top: 55%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .historyArea {
+        height: 30vh;
+        width: 40vw;
     }
 }
 
-@media screen and (min-width: 1000px) {
+@media all and (min-width: 1000px) {
 
     .historyToggle {
         width: 10vw;
