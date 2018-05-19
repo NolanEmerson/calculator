@@ -40,10 +40,11 @@ body{
     width: 90%;
     background-color: lightsteelblue;
     font-size: 10vmin;
-    border: 10px solid rgba(0, 0, 0, 0);
+    padding: 10px 10px 10px 0;
     box-sizing: border-box;
     overflow: hidden;
     border: 1px solid black;
+    border-left: 10px solid rgba(0, 0, 0, 0);
     border-radius: 5px;
     display: flex;
     flex-flow: column nowrap;
@@ -186,6 +187,7 @@ button:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 .questionHistoryHead{
     border: none;
@@ -219,6 +221,7 @@ button:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 .answerHistoryHead{
     border: none;
