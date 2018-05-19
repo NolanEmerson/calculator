@@ -116,6 +116,15 @@ button{
     box-shadow: 2px 2px 2px black;
 }
 
+button:active {
+    transform: translate(1px, 3px);
+    filter: brightness(80%);
+}
+
+button:focus {
+    outline: none;
+}
+
 .historyHolder {
     position: absolute;
     display: inline-block;
@@ -144,12 +153,13 @@ button{
     height: 65vh;
     width: 20vw;
     border: 1px solid black;
-    display: inline-flex;
+    display: flex;
     box-sizing: border-box;
     flex-flow: column wrap;
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 2px 2px 5px;
+    margin: auto;
 }
 .questionHistory{
     position: relative;
@@ -219,4 +229,29 @@ button{
 }
 .hide{
     display: none;
+}
+
+@media only screen and (orientation: portrait) {
+
+    #calculatorBase {
+        left: 30%;
+        min-height: 400px;
+        max-height: 800px;
+        min-width: 400px;
+        max-width: 800px;
+    }
+
+    .historyHolder {
+        top: 25%;
+    }
+
+    .historyToggle {
+        width: 15vw;
+    }
+
+    .historyArea {
+        height: 40vh;
+        width: 30vw;
+    }
+
 }

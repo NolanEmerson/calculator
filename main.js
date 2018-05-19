@@ -258,6 +258,7 @@ function repeatingOperation(){
         repeatMath[1] = rM1;
     }
     userInput.push(repeatMath[0], repeatMath[1]);
+    lastEquation = userInput.join('');
     doMath();
 }
 
@@ -267,6 +268,7 @@ function rolloverOperation(){
     mathAddSub();
     userInput.push(operationRollover);
     userInput.push(userInput[0]);
+    lastEquation = userInput.join('');
     doMath();
 }
 
