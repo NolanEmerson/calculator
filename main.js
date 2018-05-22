@@ -101,6 +101,9 @@ function handleNumberClick(event){
         operationRepeat = false;
     } else if(textInput !== '=' && textInput !== 'Enter') {
         if (isNaN(userInput[userInput.length-1]) === false || userInput[userInput.length-1] === '.') {
+            if (userInput[userInput.length-1] === '0' && textInput === '0') {
+                return;
+            }
             userInput[userInput.length - 1] = userInput[userInput.length - 1].concat(textInput);
             $('#displayBar').text($('#displayBar').text() + textInput);
             operationRepeat = false;
@@ -156,6 +159,11 @@ function handleOperatorClick(event){
         userInput.push(textInput);
         $('#displayBar').text($('#displayBar').text().substring(0,$('#displayBar').text().length-1) + '0' + displayText);
         operationRepeat = false;
+    } else if (userInput.length === 0) {
+        userInput.push(0);
+        userInput.push(textInput);
+        $('#displayBar').text(0+displayText);
+        operationRepeat = false;
     } else {
         userInput.push(textInput);
         $('#displayBar').text($('#displayBar').text() + displayText);
@@ -178,7 +186,27 @@ function handleClearClick(event){
         operationRepeat = false;
     } else {
         userInput.pop();
-        $('#displayBar').text(userInput.join(''));
+        var newDisplay = [];
+        for (var i=0; i<userInput.length; i++){
+            switch (userInput[i]) {
+                case '+':
+                    newDisplay.push('+');
+                    break;
+                case '-':
+                    newDisplay.push('\u2212');
+                    break;
+                case '*':
+                    newDisplay.push('\u00d7');
+                    break;
+                case '/':
+                    newDisplay.push('\u00f7');
+                    break; 
+                default:
+                    newDisplay.push(userInput[i]);
+
+            }
+        }
+        $('#displayBar').text(newDisplay.join(''));
         operationRepeat = false;
     }
 }
@@ -225,8 +253,8 @@ function decimalCheck(){
     if (userInput[userInput.length-1] === undefined){
         //if array length is 0
         if (userInput[userInput.length-1] === userInput[-1]){
-            userInput[0]=('.');
-            $('#displayBar').text($('#displayBar').text()+'.');
+            userInput[0]=('0.');
+            $('#displayBar').text($('#displayBar').text()+'0.');
         } else {
             userInput[userInput.length-1]+=('.');
             $('#displayBar').text($('#displayBar').text()+'.');
@@ -234,11 +262,11 @@ function decimalCheck(){
     }
     //if operator is not most recent input
     if (operators.indexOf(userInput[userInput.length-1]) !== -1){
-        userInput.push('.');
-        $('#displayBar').text($('#displayBar').text()+'.');
+        userInput.push('0.');
+        $('#displayBar').text($('#displayBar').text()+'0.');
         return;
     } else {
-        //if decimal is not in last array index
+        //if decimal is not in last .1+.array index
         if (userInput[userInput.length-1].indexOf('.') === -1){
             userInput[userInput.length-1]+=('.');
             $('#displayBar').text($('#displayBar').text()+'.');
@@ -258,7 +286,7 @@ function repeatingOperation(){
         repeatMath[1] = rM1;
     }
     userInput.push(repeatMath[0], repeatMath[1]);
-    lastEquation = userInput.join('');
+    lastEquation = userInput.join(' ');
     doMath();
 }
 
@@ -268,7 +296,7 @@ function rolloverOperation(){
     mathAddSub();
     userInput.push(operationRollover);
     userInput.push(userInput[0]);
-    lastEquation = userInput.join('');
+    lastEquation = userInput.join(' ');
     doMath();
 }
 
@@ -338,11 +366,15 @@ function returnSolution(){
         $('#displayBar').text('Error');
         solution = 'Error';
     } else {
+        if (solution.toString().length > 10) {
+            solution = solution.toPrecision(10);
+        }
         userInput[0] = ''+solution;
         $('#displayBar').text(solution);
     }
     operationRepeat = true;
     updateHistory(solution);
+    
 }
 
 
