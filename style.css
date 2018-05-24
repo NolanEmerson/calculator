@@ -1,6 +1,7 @@
 body{
     margin: 0;
     font-size: 0;
+    background-color: lightgray;
 }
 #container{
     height: 100vh;
@@ -153,30 +154,29 @@ button:focus {
 }
 .historyArea{
     position: relative;
-    height: 40vh;
+    /* min-height: 40vh; */
     width: 30vw;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     box-sizing: border-box;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     border-radius: 5%;
-    overflow: hidden;
     box-shadow: 2px 2px 5px;
     margin: auto;
 }
 .questionHistory{
     position: relative;
-    height: 100%;
     width: 100%;
     border: 1px solid black;
     display: inline-flex;
     box-sizing: border-box;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 2px 2px 5px;
 }
 .questionHistoryHead, .questionHistory1, .questionHistory2, .questionHistory3, .questionHistory4, .questionHistory5{
+    min-height: 8vh;
     height: 16.66%;
     width: 100%;
     box-sizing: border-box;
@@ -199,18 +199,17 @@ button:focus {
 }
 .answerHistory{
     position: absolute;
-    height: 100%;
     width: 100%;
     border: 1px solid black;
     display: inline-flex;
     box-sizing: border-box;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 2px 2px 5px;
 }
 .answerHistoryHead, .answerHistory1, .answerHistory2, .answerHistory3, .answerHistory4, .answerHistory5{
-    height: 16.66%;
+    min-height: 8vh;
     width: 100%;
     box-sizing: border-box;
     border-top: 1px solid black;
@@ -251,8 +250,12 @@ button:focus {
     }
 
     .historyArea {
-        height: 30vh;
+        /* min-height: 20vh; */
         width: 40vw;
+    }
+
+    .questionHistoryHead, .questionHistory1, .questionHistory2, .questionHistory3, .questionHistory4, .questionHistory5, .answerHistoryHead, .answerHistory1, .answerHistory2, .answerHistory3, .answerHistory4, .answerHistory5 {
+        min-height: 5vh;
     }
 }
 

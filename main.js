@@ -7,7 +7,7 @@ var repeatMath = [];
 var operationRollover = '';
 var lastEquation = null;
 var cePressed = false;
-
+var justEquated = false;
 
 function initializeApp(){
     attachClickHandlers();
@@ -97,6 +97,11 @@ function handleNumberClick(event){
         $('#displayBar').text('');
         operationRepeat = false;
     }
+    if (justEquated && textInput !== '=' && textInput !== 'Enter') {
+        userInput.pop();
+        $('#displayBar').text('');
+    }
+    justEquated = false;
     if (textInput === '.'){
         decimalCheck();
         operationRepeat = false;
@@ -132,6 +137,7 @@ function handleNumberClick(event){
 function handleOperatorClick(event){
     let displayText;
     cePressed = false;
+    justEquated = false;
     if (event !== undefined && this.length === 0){
         var textInput = event;
         displayText = event;
@@ -154,9 +160,11 @@ function handleOperatorClick(event){
         }
         $(this).blur();
     }
-    if (userInput[userInput.length -1].charAt(userInput[userInput.length -1].length - 1) === '.') {
-        userInput[userInput.length -1] += '0';
-        $('#displayBar').text($('#displayBar').text() + '0');
+    if (userInput.length) {
+        if (userInput[userInput.length -1].charAt(userInput[userInput.length -1].length - 1) === '.') {
+            userInput[userInput.length -1] += '0';
+            $('#displayBar').text($('#displayBar').text() + '0');
+        }
     }
     var operators = '+*-/';
     if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
@@ -188,6 +196,7 @@ function handleOperatorClick(event){
 
 
 function handleClearClick(event){
+    justEquated = false;
     if (event !== undefined && this.length === 0){
         var textInput = event;
         $('event').blur();
@@ -266,7 +275,8 @@ function conditionalChecks(textInput) {
         userInput[0] = userInput[0] + userInput[1];
         userInput.splice(1,1);
     }
-    lastEquation = $('#displayBar').text();
+    // lastEquation = $('#displayBar').text();
+    lastEquation = userInput.join(' ');
     doMath();
 }
 
@@ -316,8 +326,17 @@ function repeatingOperation(){
 
 
 function rolloverOperation(){
+    var equationBeforehand = userInput.slice();
+    equationBeforehand.push(operationRollover.slice());
     mathMultDiv();
     mathAddSub();
+    if (isNaN(userInput[0])){
+        userInput.pop();
+        $('#displayBar').text('Error');
+        lastEquation = equationBeforehand.join(' ');
+        updateHistory('Error');
+        return;
+    }
     userInput.push(operationRollover);
     userInput.push(userInput[0]);
     lastEquation = userInput.join(' ');
@@ -397,17 +416,43 @@ function returnSolution(){
         $('#displayBar').text(solution);
     }
     operationRepeat = true;
+    justEquated = true;
     updateHistory(solution);
     
 }
 
 
 function updateHistory(solution){
+
+    var operatorFix = lastEquation.split(' ');
+
+    for (var i=0; i<operatorFix.length; i++) {
+        switch (operatorFix[i]) {
+            case '/':
+                operatorFix[i] = '\u00f7';
+                break;
+            case '*':
+                operatorFix[i] = '\u00d7';
+                break;
+            case '+':
+                operatorFix[i] = '+';
+                break;
+            case '-':
+                operatorFix[i] = '\u2212';
+                break;
+            case ' ':
+                operatorFix[i] = '';
+                break;
+        }
+    }
+
+    operatorFix = operatorFix.join(' ');
+
     $('.questionHistory5').text($('.questionHistory4').text());
     $('.questionHistory4').text($('.questionHistory3').text());
     $('.questionHistory3').text($('.questionHistory2').text());
     $('.questionHistory2').text($('.questionHistory1').text());
-    $('.questionHistory1').text(lastEquation);
+    $('.questionHistory1').text(operatorFix);
 
     $('.answerHistory5').text($('.answerHistory4').text());
     $('.answerHistory4').text($('.answerHistory3').text());
