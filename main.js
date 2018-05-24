@@ -6,6 +6,7 @@ var operationRepeat = false;
 var repeatMath = [];
 var operationRollover = '';
 var lastEquation = null;
+var cePressed = false;
 
 
 function initializeApp(){
@@ -99,7 +100,11 @@ function handleNumberClick(event){
     if (textInput === '.'){
         decimalCheck();
         operationRepeat = false;
+        cePressed = false;
     } else if(textInput !== '=' && textInput !== 'Enter') {
+        if (cePressed) {
+            userInput.pop();
+        }
         if (isNaN(userInput[userInput.length-1]) === false || userInput[userInput.length-1] === '.') {
             if (userInput[userInput.length-1] === '0' && textInput === '0') {
                 return;
@@ -109,11 +114,16 @@ function handleNumberClick(event){
             operationRepeat = false;
         } else {
             userInput.push(textInput);
-            $('#displayBar').text($('#displayBar').text() + textInput);
+            if (cePressed) {
+                $('#displayBar').text($('#displayBar').text().substring(0, $('#displayBar').text().length -1) + textInput);
+            } else {
+                $('#displayBar').text($('#displayBar').text() + textInput);
+            }
             operationRepeat = false;
         }
-    }
-        else{
+        cePressed = false;
+    } else {
+        cePressed = false;
         conditionalChecks(textInput);
             }
 }
@@ -121,6 +131,7 @@ function handleNumberClick(event){
 
 function handleOperatorClick(event){
     let displayText;
+    cePressed = false;
     if (event !== undefined && this.length === 0){
         var textInput = event;
         displayText = event;
@@ -142,6 +153,10 @@ function handleOperatorClick(event){
                 break;
         }
         $(this).blur();
+    }
+    if (userInput[userInput.length -1].charAt(userInput[userInput.length -1].length - 1) === '.') {
+        userInput[userInput.length -1] += '0';
+        $('#displayBar').text($('#displayBar').text() + '0');
     }
     var operators = '+*-/';
     if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
@@ -185,7 +200,11 @@ function handleClearClick(event){
         $('#displayBar').text('');
         operationRepeat = false;
     } else {
-        userInput.pop();
+        if (!isNaN(userInput[userInput.length -1])) {
+            userInput[userInput.length -1] = '0'
+        } else {
+            userInput.pop();
+        }
         var newDisplay = [];
         for (var i=0; i<userInput.length; i++){
             switch (userInput[i]) {
@@ -208,6 +227,7 @@ function handleClearClick(event){
         }
         $('#displayBar').text(newDisplay.join(''));
         operationRepeat = false;
+        cePressed = true;
     }
 }
 
@@ -217,6 +237,10 @@ function conditionalChecks(textInput) {
     if (userInput.length === 0 || $('#displayBar').text() === 'Ready' ){
         $('#displayBar').text('Ready');
         return
+    }
+    if (userInput[userInput.length -1].charAt(userInput[userInput.length -1].length - 1) === '.') {
+        userInput[userInput.length -1] += '0';
+        $('#displayBar').text($('#displayBar').text() + '0');
     }
     if (userInput[userInput.length-1] === '.') {
         userInput[userInput.length - 1] = '0';
