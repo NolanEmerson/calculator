@@ -93,7 +93,7 @@ function handleNumberClick(event){
         textInput = $(this).text();
         $(this).blur();
     }
-    if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
+    if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready' || $('#displayBar').text() === 'Infinity'){
         $('#displayBar').text('');
         operationRepeat = false;
     }
@@ -167,8 +167,9 @@ function handleOperatorClick(event){
         }
     }
     var operators = '+*-/';
-    if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready'){
+    if ($('#displayBar').text() === 'Error' || $('#displayBar').text() === 'Ready' || $('#displayBar').text() === 'Infinity'){
         $('#displayBar').text('');
+        userInput.pop();
         operationRepeat = false;
     }
     if (operators.indexOf(userInput[userInput.length-1]) !== -1) {
@@ -404,10 +405,14 @@ function mathAddSub(){
 function returnSolution(){
     var solution;
     solution = userInput[0];
-    if (solution === Infinity || isNaN(solution)){
+    if (isNaN(solution)){
         userInput[0] = '';
         $('#displayBar').text('Error');
         solution = 'Error';
+    } else if (solution === Infinity) {
+        userInput[0] = '';
+        $('#displayBar').text('Infinity');
+        solution = 'Infinity';
     } else {
         if (solution.toString().length > 10) {
             solution = solution.toPrecision(10);
@@ -452,7 +457,7 @@ function updateHistory(solution){
     $('.questionHistory4').text($('.questionHistory3').text());
     $('.questionHistory3').text($('.questionHistory2').text());
     $('.questionHistory2').text($('.questionHistory1').text());
-    $('.questionHistory1').text(operatorFix);
+    $('.questionHistory1').text(operatorFix + ' =');
 
     $('.answerHistory5').text($('.answerHistory4').text());
     $('.answerHistory4').text($('.answerHistory3').text());
