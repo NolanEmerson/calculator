@@ -339,7 +339,7 @@ function rolloverOperation(){
     }
     userInput.push(operationRollover);
     userInput.push(userInput[0]);
-    lastEquation = userInput.join(' ');
+    lastEquation = equationBeforehand.join(' ');
     doMath();
 }
 

@@ -40,7 +40,7 @@ body{
     height: 75%;
     width: 90%;
     background-color: lightsteelblue;
-    font-size: 8vmin;
+    font-size: 6vmin;
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
@@ -233,6 +233,11 @@ button:focus {
     display: none;
 }
 
+.questionHistoryHead, .questionHistory1, .questionHistory2, .questionHistory3, .questionHistory4, .questionHistory5, .answerHistoryHead, .answerHistory1, .answerHistory2, .answerHistory3, .answerHistory4, .answerHistory5 {
+    padding: 3px;
+    word-break: break-word;
+}
+
 @media all and (orientation: portrait) and (max-width: 600px)  {
 
     #calculatorBase {
@@ -241,6 +246,11 @@ button:focus {
         transform: translateX(-50%);
         height: 50%;
         width: 50%;
+    }
+
+    #displayBar {
+        padding: 5px;
+        font-size: 5vmin;
     }
 
     .historyHolder {
@@ -275,5 +285,21 @@ button:focus {
 
     #calculatorBase {
         left: 35%;
+    }
+}
+
+@media all and (min-width: 1px) and (max-width: 1000px) and (orientation: landscape) {
+
+    #calculatorBase {
+        width: 50%;
+        left: 30%;
+    }
+
+    .historyHolder {
+        right: 5%;
+    }
+
+    .historyArea {
+        width: 35vw;
     }
 }
