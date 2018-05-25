@@ -406,11 +406,11 @@ function returnSolution(){
     var solution;
     solution = userInput[0];
     if (isNaN(solution)){
-        userInput[0] = '';
+        userInput.pop();
         $('#displayBar').text('Error');
         solution = 'Error';
     } else if (solution === Infinity) {
-        userInput[0] = '';
+        userInput.pop();
         $('#displayBar').text('Infinity');
         solution = 'Infinity';
     } else {
