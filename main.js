@@ -416,6 +416,8 @@ function returnSolution(){
     } else {
         if (solution.toString().length > 10) {
             solution = solution.toPrecision(10);
+            solution = '' + solution;
+            solution = parseFloat(solution);
         }
         userInput[0] = ''+solution;
         $('#displayBar').text(solution);
