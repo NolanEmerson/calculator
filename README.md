@@ -4,7 +4,7 @@ This is an individually-developed calculator, built over a one week period. It u
 
 ## Features
 
-- [x] Basic and Complex Math
-- [x] Order of operations
-- [x] Responsive design
-- [x] Question and answer history
+- Basic and Complex Math
+- Order of operations
+- Responsive design
+- Question and answer history
